@@ -6,6 +6,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Role;
+use App\Models\Comment;
+use App\Models\SyntheticItem;
+use App\Models\VideoItem;
+use App\Models\GameItem;
+use App\Models\FilmItem;
+use App\Models\MusicItem;
+use App\Models\PostItem;
+use App\Models\NoteItem;
+use App\Models\LearningItem;
 
 class User extends Authenticatable
 {
@@ -18,7 +28,9 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'role_id',
         'name',
+        'image',
         'email',
         'password',
     ];
@@ -45,4 +57,55 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function syntheticItems()
+    {
+        return $this->hasMany(SyntheticItem::class);
+    }
+
+    public function videoItems()
+    {
+        return $this->hasMany(VideoItem::class);
+    }
+
+    public function gameItems()
+    {
+        return $this->hasMany(GameItem::class);
+    }
+
+    public function filmItems()
+    {
+        return $this->hasMany(FilmItem::class);
+    }
+
+    public function musicItems()
+    {
+        return $this->hasMany(MusicItem::class);
+    }
+
+    public function postItems()
+    {
+        return $this->hasMany(PostItem::class);
+    }
+
+    public function noteItems()
+    {
+        return $this->hasMany(NoteItem::class);
+    }
+
+    public function learningItems()
+    {
+        return $this->hasMany(LearningItem::class);
+    }
+
 }
